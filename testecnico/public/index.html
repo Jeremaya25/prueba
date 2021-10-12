@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Diccionario de Pere</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/50/Closed_Book_Icon.svg">
+  <link rel="stylesheet" href="./style.css"/>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <h1>This is a selfmade dictionary!</h1>
+  <h2>Feel free to add some words...</h2>
+
+  <div id="app">
+    <p>{{ diccionari }}</p>
+    <button v-on:click="getParaules">Get Paraules</button>
+  </div>
+
+  <footer id="foot">
+    {{ message }}
+  </footer>
+
+  <script>
+    var app = new Vue ({
+      el: '#app',
+      data: {
+        diccionari: null
+      },
+      methods: {
+        getParaules: function() {
+          var diccionario = require(../utils/getDiccionari)
+          this.diccionari = diccionario
+        }
+      }
+    })
+    var footer = new Vue({
+      el: '#foot',
+      data: {
+        message: 'You loaded this page on ' + new Date().toLocaleString()
+      }
+    })
+  </script>
+</body>
+</html>
