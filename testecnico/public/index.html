@@ -12,32 +12,18 @@
   <h2>Feel free to add some words...</h2>
 
   <div id="app">
-    <p>{{ diccionario }}</p>
-    <button v-on:click="getParaules">Get Paraules</button>
+    <ol>
+      <todo-item 
+        v-for="item in groceryList"
+        v-bind:todo="item"
+        v-bind:key="item.id"
+      ></todo-item>
+    </ol>
   </div>
 
   <footer id="foot">
     {{ message }}
   </footer>
-
-  <script>
-    var app = new Vue ({
-      el: '#app',
-      data: {
-        diccionario: null
-      },
-      methods: {
-        getParaules: function() {
-          
-        }
-      }
-    })
-    var footer = new Vue({
-      el: '#foot',
-      data: {
-        message: 'You loaded this page on ' + new Date().toLocaleString()
-      }
-    })
-  </script>
+  <script src="index.js"></script>
 </body>
 </html>

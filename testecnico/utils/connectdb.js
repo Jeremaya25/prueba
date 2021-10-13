@@ -7,9 +7,4 @@ const connection = mysql.createConnection({
   database: "testecnic"
 });
 
-connection.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected to database");
-});
-
-export default connection;
+module.exports = connection;
