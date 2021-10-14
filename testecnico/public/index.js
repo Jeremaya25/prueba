@@ -4,20 +4,19 @@ Vue.component('todo-item', {
     template : `<li>{{ todo.text }}</li>`
 })
 
-var app = new Vue ({
-    el: '#app',
+new Vue ({
+    el: '#wordlist',
     data: {
-        groceryList: [
-            { id: 0, text: 'Vegetables' },
-            { id: 1, text: 'Cheese' },
-            { id: 2, text: 'Whatever else humans are supposed to eat' }
-        ]
-    }
-})
-
-var footer = new Vue({
-    el: '#foot',
-    data: {
-      message: 'You loaded this page on ' + new Date().toLocaleString()
+        wordList: null
+    },
+    mounted () {
+        axios
+          .get('http://localhost:3001/get')
+          .then(
+            response => (
+                this.wordList = response.data,
+                console.log(this.wordList)
+            )
+          )
     }
 })
