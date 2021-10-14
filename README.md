@@ -6,4 +6,4 @@
 
 ### Requerimientos
 - Node.js (npm)
-- Mysql (configurar paràmetros en 'ticand/testecnico/utils/connectdb')
+- Mysql (configurar paràmetros en '/ticand/testecnico/utils/connectdb.js')
