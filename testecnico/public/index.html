@@ -10,15 +10,21 @@
 <body>
 
   <h1>This is a selfmade dictionary!</h1>
-  <h2>Feel free to <button>add</button> some words...</h2>
+  <h2>Feel free to add some words...</h2>
 
   <div id="wordlist">
     <ul v-for="word in wordList" :key="word.nombre">
-      {{ word.nombre }}
+      {{ word.nombre }} <button id="editbutton">E</button><button id="deletebutton" v-on:click="DeleteWord(word.nombre)">X</button>
       <li>
         {{ word.definicion }}
       </li>
     </ul>
+  </div>
+  
+  <div id="addtolist">
+    <input type="text" placeholder="Write your word here..." v-model="nombre"></input><br>
+    <input type="text" placeholder="Write the meaning here..." size='75' v-model="definicion"></input><br>
+    <button id="addbutton" v-on:click="InsertWord">ADD</button>
   </div>
 
   <script src="index.js"></script>
