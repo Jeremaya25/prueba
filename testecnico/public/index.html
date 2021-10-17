@@ -3,31 +3,42 @@
 <head>
   <title>Diccionario de Pere</title>
   <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/50/Closed_Book_Icon.svg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="./style.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/vuex"></script>
 </head>
 <body>
+  <header>
+    <h1>This is a selfmade dictionary!</h1>
+    <h2>Feel free to add some words...</h2>
+  <header>
 
-  <h1>This is a selfmade dictionary!</h1>
-  <h2>Feel free to add some words...</h2>
-
-  <div id="wordlist">
-    <ul v-for="word in wordList" :key="word.nombre">
-      {{ word.nombre }} 
-      <button id="editbutton" v-on:click="UpdateWord(word.nombre, word.definicion)">E</button>
-      <button id="deletebutton" v-on:click="DeleteWord(word.nombre)">X</button>
-      <li>
-        {{ word.definicion }}
-      </li>
-    </ul>
+  <div id="wordlist" class="row row-cols-auto">
+    <div class="card" v-for="word in wordList" :key="word.nombre">
+      <h3 class="card-header">{{ word.nombre.charAt(0) }}</h3>
+      <div class="card-body">
+        <h5 class="card-title">{{ word.nombre }}</h5>
+        <p class="card-text"> {{ word.definicion }} </p>
+      </div>
+      <div class="card-footer">
+        <button style="background: url(myimage.png)" id="editbutton" v-on:click="UpdateWord(word.nombre, word.definicion)" class="btn btn-warning"><img src="./content/edit-icon.png"/></button>
+        <button id="deletebutton" v-on:click="DeleteWord(word.nombre)" class="btn btn-danger"><img src="./content/delete-icon.png"/></button>
+      </div>
+    </div>
   </div>
   
   <div id="addtolist">
-    <input type="text" placeholder="Write your word here..." v-model="nombre"></input><br>
-    <input type="text" placeholder="Write the meaning here..." size='75' v-model="definicion"></input><br>
-    <button id="addbutton" v-on:click="InsertWord">ADD</button>
+    <div class="form-floating mb-3">
+      <input class="form-control" id="floatingInput" placeholder="Write your word here..." v-model="nombre"></input>
+      <label for="floatingInput">Word</label>
+    </div>
+    <div class="form-floating">
+      <textarea class="form-control" id="floatingTextarea" placeholder="Write the meaning here..." v-model="definicion"></textarea>
+      <label for="floatingTextarea">Meaning</label>
+    </div>
+    <button id="addButton" class="btn btn-primary" v-on:click="InsertWord">ADD</button>
   </div>
 
   <script type="module" src="index.js"></script>

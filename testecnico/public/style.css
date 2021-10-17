@@ -1,0 +1,29 @@
+body {
+  text-align: center;
+  padding : 5%;
+}
+header {
+  margin : 50px;
+}
+button img {
+  width: 25px;
+  height: 25px;
+}
+.card {
+  margin : 5px;
+  width: 18rem;
+}
+#addtolist {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40rem;
+}
+#wordlist {
+  margin : 10px;
+}
+#floatingTextarea {
+  height: 200px;
+}
+#addButton {
+  margin-top: 10px;
+}
