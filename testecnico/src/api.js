@@ -20,7 +20,10 @@ app.get('/', (req, res) => {
 app.post('/add', (req, res) => {
     var sql = `INSERT INTO palabras (nombre, definicion) VALUES ('${req.body.nombre}', '${req.body.definicion}')`;
     connection.query(sql, function (err, result) {
-        if (err) throw err;
+        if (err) {
+            if (err.code === 'ER_DUP_ENTRY') return console.log("Entry already exists");
+            else throw err;
+        }
         console.log("1 record inserted");
     });
 })
@@ -40,8 +43,8 @@ app.get('/get', (req, res) => {
     });
 })
 
-app.post('/update', (req, res) => {
-    if (err) throw err;
+app.put('/update', (req, res) => {
+    console.log (req.body + " - " + req.body.nombre  + ": " + req.body.definicion)
     var sql = `UPDATE palabras SET definicion = '${req.body.definicion}' WHERE nombre = '${req.body.nombre}'`;
     connection.query(sql, function (err, result) {
         if (err) throw err;

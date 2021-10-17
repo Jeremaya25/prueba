@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="./style.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
   <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vuex"></script>
 </head>
 <body>
 
@@ -14,7 +15,9 @@
 
   <div id="wordlist">
     <ul v-for="word in wordList" :key="word.nombre">
-      {{ word.nombre }} <button id="editbutton">E</button><button id="deletebutton" v-on:click="DeleteWord(word.nombre)">X</button>
+      {{ word.nombre }} 
+      <button id="editbutton" v-on:click="UpdateWord(word.nombre, word.definicion)">E</button>
+      <button id="deletebutton" v-on:click="DeleteWord(word.nombre)">X</button>
       <li>
         {{ word.definicion }}
       </li>
@@ -27,6 +30,6 @@
     <button id="addbutton" v-on:click="InsertWord">ADD</button>
   </div>
 
-  <script src="index.js"></script>
+  <script type="module" src="index.js"></script>
 </body>
 </html>

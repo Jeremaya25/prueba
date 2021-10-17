@@ -1,17 +1,37 @@
-new Vue ({
-  el: '#wordlist',
-  data: {
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+  state: {
     wordList: null
   },
-  mounted () {
-    axios
-      .get('http://localhost:3001/get')
-      .then(
-        response => (
-            this.wordList = response.data
+  mutations: {
+    async load (state) {
+      axios
+        .get('http://localhost:3001/get')
+        .then(
+          response => (
+            state.wordList = response.data
+          )
         )
-      )
+    }
   },
+  actions: {
+    retrieveWords ({ commit }) {
+      setTimeout(() => {
+        commit('load')
+      }, 200)
+    }
+  }
+});
+
+store.commit('load')
+
+new Vue ({
+  el: '#wordlist',
+  store,
+  computed : Vuex.mapState([
+    'wordList'
+  ]),
   methods : {
     DeleteWord(nombre) {
       axios
@@ -24,6 +44,24 @@ new Vue ({
           response => (
             console.log(response)
           )
+        ).then(
+          this.$store.dispatch('retrieveWords')
+        )
+    },
+    UpdateWord(nombre, definicion) {
+      axios
+        .put('http://localhost:3001/update',{
+          data : {
+            nombre : nombre,
+            definicion : definicion
+          }
+        })
+        .then(
+          response => (
+            console.log(response)
+          )
+        ).then(
+          this.$store.dispatch('retrieveWords')
         )
     }
   }
@@ -31,13 +69,14 @@ new Vue ({
 
 new Vue ({
   el: '#addtolist',
+  store,
   data: {
     nombre : '',
     definicion : ''
   },
   methods : {
-    InsertWord : function () {
-      if (nombre = "") return console.log("The word is mandatory")
+    InsertWord() {
+      if (this.nombre === "") return console.log("The word is mandatory")
       axios
         .post('http://localhost:3001/add', {
           nombre : this.nombre.charAt(0).toUpperCase() + this.nombre.slice(1),
@@ -46,7 +85,12 @@ new Vue ({
         .then(
           response => (
             console.log(response)
-          )
+          ),
+          this.nombre = "",
+          this.definicion = ""
+        )
+        .then(
+          this.$store.dispatch('retrieveWords')
         )
     }
   }
