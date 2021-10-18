@@ -19,7 +19,7 @@ const store = new Vuex.Store({
     retrieveWords ({ commit }) {
       setTimeout(() => {
         commit('load')
-      }, 200)
+      }, 100)
     }
   }
 });
@@ -44,9 +44,8 @@ new Vue ({
           response => (
             console.log(response)
           )
-        ).then(
-          this.$store.dispatch('retrieveWords')
         )
+      this.$store.dispatch('retrieveWords')
     },
     UpdateWord(nombre, definicion) {
       axios
@@ -60,9 +59,8 @@ new Vue ({
           response => (
             console.log(response)
           )
-        ).then(
-          this.$store.dispatch('retrieveWords')
         )
+        this.$store.dispatch('retrieveWords')
     }
   }
 })
@@ -89,9 +87,7 @@ new Vue ({
           this.nombre = "",
           this.definicion = ""
         )
-        .then(
-          this.$store.dispatch('retrieveWords')
-        )
+        this.$store.dispatch('retrieveWords')
     }
   }
 })
