@@ -6,4 +6,4 @@
 >La pàgina se ejecutarà en el puerto 3000, acceder con [link](http://localhost:3000)
 ### Requerimientos
 - Node.js (npm)
-- Mysql (configurar paràmetros en '/ticand/testecnico/utils/connectdb.js')
+- Mysql (configurar paràmetros en '/testecnico/utils/connectdb.js')
